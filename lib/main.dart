@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:spotify_new_playlist_screen/pages/being_played_song_page.dart';
 
 void main() {
   runApp(const MainApp());
@@ -9,12 +10,10 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Scaffold(
-        body: Center(
-          child: Text('Hello World!'),
-        ),
-      ),
-    );
+    return MaterialApp(
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData.dark(),
+        themeMode: ThemeMode.dark,
+        home: const PlayedSongPage());
   }
 }
