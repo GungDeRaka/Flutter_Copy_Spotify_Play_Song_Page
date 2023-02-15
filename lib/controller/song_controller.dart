@@ -1,19 +1,47 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'dart:async';
 
 import 'package:flutter/material.dart';
 
 class SongController extends ChangeNotifier {
-  int? value = 0;
+  int time = 0;
+  double value=10;
+  double totalValue=100;
+  Timer? timerr;
+
+
+  int? currentIndex = 0;
   List<String> options = ["Playlist", "Lyrics"];
-  void chooseChip( bool selected, int index){
-    value = (selected ? index : null);
+  void chooseChip(bool selected, int index) {
+    currentIndex = (selected ? index : null);
     notifyListeners();
   }
 
-bool isPaused = true;
-    IconData get playIcon =>
-      isPaused ? Icons.play_arrow : Icons.pause;
-    void playAndPause(){
-      isPaused = !isPaused;
-      notifyListeners();
-    }
+  bool isPaused = true;
+  IconData get playIcon => isPaused ? Icons.pause : Icons.play_arrow;
+
+  void playAndPause() {
+    isPaused = !isPaused;
+    time = 0;
+    value = 0;
+    Timer.periodic(const Duration(seconds: 1), (timer) {
+      if (isPaused) {
+        value+=900;
+        time= timer.tick;
+        notifyListeners();
+      } else if (!isPaused ||
+          timer.tick == Duration(minutes: 2, seconds: 43).inSeconds) {
+        //&& timer.tick == Duration(minutes: 2, seconds: 43).inSeconds
+        time= timer.tick;
+        timer.cancel();
+        // timer.
+      }
+    });
+    notifyListeners();
+  }
+
+  @override
+  String toString() {
+    return 'SongController(time: $time, value=10: $value=10, totalValue=100: $totalValue=100, currentIndex: $currentIndex, options: $options, isPaused: $isPaused)';
+  }
 }

@@ -16,12 +16,10 @@ class PlayedSongPage extends StatefulWidget {
 }
 
 class _PlayedSongPageState extends State<PlayedSongPage> {
-  
-
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<SongController>(
-      create:(context) => SongController(),
+      create: (context) => SongController(),
       child: SafeArea(
         child: Scaffold(
           body: Container(
@@ -107,9 +105,10 @@ class _PlayedSongPageState extends State<PlayedSongPage> {
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
                               Consumer<SongController>(
-                                
                                   builder: (context, song, child) => PlayButton(
-                                      onTap: () {song.playAndPause();},
+                                      onTap: () {
+                                        song.playAndPause();
+                                      },
                                       buttonColor: Colors.black,
                                       buttonIcon: song.playIcon)),
                               const SizedBox(
@@ -162,18 +161,23 @@ class _PlayedSongPageState extends State<PlayedSongPage> {
                 const SizedBox(
                   height: 12.0,
                 ),
-                const Padding(
+                Padding(
                   padding: EdgeInsets.symmetric(horizontal: 40),
-                  child: TimeProgressBar(),
+                  child: Consumer<SongController>(
+                      builder: (context, song, child) => TimeProgressBar(
+                            value: song.value,
+                          )),
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 40),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: const [
-                      Text("0:22"),
-                      Text("2:43"),
-                    ],
+                  child: Consumer<SongController>(
+                    builder: (context, song, child) => Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text("0:${song.time}"),
+                        Text("2:43"),
+                      ],
+                    ),
                   ),
                 ),
               ],

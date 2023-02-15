@@ -26,7 +26,7 @@ class SongChip extends StatelessWidget {
                 label: Text(
                   song.options[index],
                 ),
-                selected: song.value == index,
+                selected: song.currentIndex == index,
                 labelStyle: const TextStyle(fontSize: 16),
                 onSelected: (bool selected) => song.chooseChip(selected, index),
               ),
