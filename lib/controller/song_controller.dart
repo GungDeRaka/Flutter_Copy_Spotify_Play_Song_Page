@@ -5,10 +5,9 @@ import 'package:flutter/material.dart';
 
 class SongController extends ChangeNotifier {
   int time = 0;
-  double value=10;
-  double totalValue=100;
+  double value = 10;
+  double totalValue = 100;
   Timer? timerr;
-
 
   int? currentIndex = 0;
   List<String> options = ["Playlist", "Lyrics"];
@@ -17,23 +16,27 @@ class SongController extends ChangeNotifier {
     notifyListeners();
   }
 
-  bool isPaused = true;
+  bool isPaused = false;
   IconData get playIcon => isPaused ? Icons.pause : Icons.play_arrow;
 
   void playAndPause() {
     isPaused = !isPaused;
     time = 0;
     value = 0;
+
     Timer.periodic(const Duration(seconds: 1), (timer) {
       if (isPaused) {
-        value+=900;
-        time= timer.tick;
+        value += 900;
+        time = timer.tick;
+
+        print(time);
         notifyListeners();
       } else if (!isPaused ||
           timer.tick == Duration(minutes: 2, seconds: 43).inSeconds) {
         //&& timer.tick == Duration(minutes: 2, seconds: 43).inSeconds
-        time= timer.tick;
+
         timer.cancel();
+        // notifyListeners();
         // timer.
       }
     });
