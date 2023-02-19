@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:spotify_new_playlist_screen/controller/icon_buttons_controller.dart';
 import 'package:spotify_new_playlist_screen/controller/song_controller.dart';
+import 'package:spotify_new_playlist_screen/pages/more_action_screen.dart';
 import 'package:spotify_new_playlist_screen/widgets/play_butto.dart';
 
 import '../widgets/favourite_button.dart';
@@ -135,7 +136,13 @@ class _PlayedSongPageState extends State<PlayedSongPage> {
                       Column(
                         children: [
                           IconButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => const MoreAction(),
+                                  ));
+                            },
                             icon: const Icon(
                               Icons.more_vert,
                               size: 28.0,
@@ -162,7 +169,7 @@ class _PlayedSongPageState extends State<PlayedSongPage> {
                   height: 12.0,
                 ),
                 Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 40),
+                  padding: const EdgeInsets.symmetric(horizontal: 40),
                   child: Consumer<SongController>(
                       builder: (context, song, child) => TimeProgressBar(
                             value: song.value,
