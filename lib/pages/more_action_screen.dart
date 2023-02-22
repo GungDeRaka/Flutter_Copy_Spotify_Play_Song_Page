@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:spotify_new_playlist_screen/models/more_action_model.dart';
 
 import '../widgets/action_tile.dart';
 import '../widgets/music_bar.dart';
@@ -18,7 +19,7 @@ class MoreAction extends StatelessWidget {
               height: 36.0,
             ),
             const Padding(
-              padding:  EdgeInsets.only(bottom: 12),
+              padding: EdgeInsets.only(bottom: 12),
               child: SongQueue(),
             ),
             Expanded(
@@ -60,9 +61,11 @@ class MoreAction extends StatelessWidget {
                                   SizedBox(
                                     width: 8.0,
                                   ),
-                                  Icon(
-                                    Icons.discord_outlined,
-                                    size: 28.0,
+                                  ImageIcon(
+                                    AssetImage(
+                                      "assets/icons/spotify.png",
+                                    ),
+                                    size: 24.0,
                                   ),
                                   SizedBox(
                                     width: 12.0,
@@ -77,12 +80,15 @@ class MoreAction extends StatelessWidget {
                     ),
                   ),
                   ListView.builder(
-                  itemCount: 12,
-                  shrinkWrap: true,
-                  physics: const ScrollPhysics(),
-                  itemBuilder: (BuildContext context, int index) {
-                  return ActionTile(icon: Icons.abc,text: "Hello World!",);
-                  },
+                    itemCount: action.length,
+                    shrinkWrap: true,
+                    physics: const ScrollPhysics(),
+                    itemBuilder: (BuildContext context, int index) {
+                      return ActionTile(
+                        icon: action[index].icon,
+                        text: action[index].actionName
+                      );
+                    },
                   ),
                 ],
               ),

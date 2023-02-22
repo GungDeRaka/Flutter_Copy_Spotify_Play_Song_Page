@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class ActionTile extends StatelessWidget {
   const ActionTile({super.key, required this.icon, required this.text});
 
-  final IconData icon;
+  final String icon;
   final String text;
 
   @override
@@ -11,7 +11,12 @@ class ActionTile extends StatelessWidget {
     return InkWell(
       child: ListTile(
         horizontalTitleGap: 8,
-        leading: Icon(icon, size: 24),
+        leading: ImageIcon(
+          AssetImage(
+            icon,
+          ),
+          size: 24.0,
+        ),
         title: Text(
           text,
           style: const TextStyle(
